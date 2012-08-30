@@ -61,4 +61,9 @@ class nginx::config inherits nginx::params {
     purge   => true,
     recurse => true,
   }
+
+  file { "${nginx::config::nx_conf_dir}/mime.types":
+    source  => '/etc/puppet/modules/nginx/templates/mime.types',
+    ensure  => file,
+  }
 }
