@@ -36,5 +36,8 @@ class nginx::package {
         before  => Anchor['nginx::package::end'],
       }
     }
+    default: {
+      err "module nginx is not supported for operating system ${::operatingsystem}"
+    }
   }
 }

@@ -34,12 +34,13 @@ class nginx::params {
   $nx_gzip_comp_level         = 1
   $nx_gzip_http_version       = '1.1'
   $nx_gzip_proxied            = 'any'
-  $nx_gzip_static             = off
+  $nx_gzip_static             = on
   $nx_gzip_types              = [
                                   'text/plain',
                                   'text/css',
                                   'text/javascript',
                                   'application/x-javascript',
+                                  'application/json',
                                   'text/xml',
                                   'application/atom+xml',
                                   'text/comma-separated-values',
@@ -57,9 +58,13 @@ class nginx::params {
 
   $nx_proxy_redirect          = off
   $nx_proxy_set_header        = [
-                                  'Host $host', 'X-Real-IP $remote_addr',
+                                  'Host $host',
+                                  'X-Real-IP $remote_addr',
                                   'X-Forwarded-For $proxy_add_x_forwarded_for',
+                                  'X-SSL-CERTIFICATE $ssl_client_cert'
                                 ]
+  $nx_proxy_hide_header       = ['HTTPS', 'X-Client-Verify.*']
+  $nx_proxy_set_https_header  = ['Host $host', 'HTTPS https']
 
   $nx_client_body_temp_path   = "${nx_run_dir}/client_body_temp"
   $nx_client_body_buffer_size = '128k'
