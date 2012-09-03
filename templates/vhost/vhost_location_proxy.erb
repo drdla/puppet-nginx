@@ -2,6 +2,5 @@
     proxy_pass          <%= proxy %>;
     proxy_read_timeout  <%= proxy_read_timeout %>;
     <% scope.lookupvar('nginx::params::nx_proxy_set_https_header').each do |header| %>
-    proxy_set_header    <%= header %>
-    <% end %>
+    proxy_set_header    <%= header %>;<% end %>
   }
